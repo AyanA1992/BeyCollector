@@ -1,0 +1,125 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Bey Details</h1>
+
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ beyonce.name }}</span>
+        <p>Breed: {{ beyonce.state }}</p>
+        <p>Description: {{ beyonce.description }}</p>
+        {% if cat.age > 0 %}
+        <p>Age: {{ cat.age }}</p>
+        {% else %}
+        <p>Age: before solo career</p>
+        {% endif %}
+      </div>
+      <div class="card-action">
+        <a href="{% url 'beyonce_update' beyonce.id %}">Edit</a>
+        <a href="{% url 'beyonce_delete' beyonce.id %}">Delete</a>
+      </div>
+    </div>
+    {% for photo in beyonce.photo_set.all %}
+      <img src="{{ photo.url }}" alt="{{ beyonce.name }}">
+    {% empty %}
+      <div class="card-panel teal-text center-align">No Photos</div>
+    {% endfor %}
+
+    <form 
+      action="{% url 'add_photo' beyonce.id %}" 
+      method="POST" 
+      enctype="multipart/form-data"
+      class="card-panel">
+      {% csrf_token %}
+      <input type="file" name="photo-file">
+      <input type="submit" value="Upload Photo" class="btn blue">
+    </form>
+  </div>
+  <div class="col s6">
+    <form action="{% url 'add_sets' beyonce.id %}" method="POST">
+      {% csrf_token %}
+      {{ shows_form.as_p }}
+      <input type="submit" value="Add Set" class="btn blue">
+    </form>
+
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>set</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for shows in beyonce.shows_set.all %}
+        <tr>
+          <td>{{ set.date }}</td>
+          <td>{{ set.get_shows_display }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col s6">
+    
+    <h3>{{ beyonce.name }}'s Tours</h3>
+    {% if beyonce.tours.count %}
+    {% for tour in beyonce.tours.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          A <span class="{{ tour.color.lower }}-text">{{ tour.color }}</span> {{ toy.name }}
+        </span>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h5>{{ beyonce.name }} doesn't have any tours yet 😞</h5>
+    {% endif %}
+  </div>
+  <div class="col s6">
+    <!-- toys a cat does NOT have -->
+    <h3>Available Tours</h3>
+    {% if tours.count %}
+    {% for tour in tours %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          A <span class="{{ tour.color.lower }}-text">{{ tour.color }}</span>
+          {{ tour.name }}
+        </span>
+      </div>
+      <div class="card-action">
+        <form action="{% url 'assoc_tour' beyonce.id tour.id %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="Add" class="btn">
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h5>{{ tour.name }} Already Has All Tours Available</h5>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  // variables
+  const dateEl = document.getElementById('id_date');
+  const setEl = document.getElementById('id_set');
+
+  // materialize form widget config
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+
+  M.FormSelect.init(setEl);
+</script>
+
+{% endblock %}

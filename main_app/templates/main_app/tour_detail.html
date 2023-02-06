@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Tour Details</h1>
+
+<div class="card">
+    <a href="{% url 'tours_detail' tour.id %}">
+        <div class="card-content">
+            <span class="card-title">A <span class="{{tour.color.lower}}-text">{{ tour.color.capitalize }}</span>
+                {{ tour.name }}</span>
+        </div>
+    </a>
+    <div class="card-action">
+        <a href="{% url 'tours_update' tour.id %}">Edit</a>
+        <a href="{% url 'tours_delete' tour.id %}">Delete</a>
+    </div>
+</div>
+
+{% endblock %}

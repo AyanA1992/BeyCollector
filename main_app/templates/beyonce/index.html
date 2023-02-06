@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Beyonce List</h1>
+
+{% for beyonce in beyonces %}
+<div class="card">
+  <a href="{% url 'detail' beyonce.id %}" >
+  <div class="card-content>
+    <span class="card-title">{{ beyonce.name }}</span>
+    <p>State: {{ beyonce.state }}</p>
+    <p>Description: {{ beyonce.description }}</p>
+    {% if beyonce.age > 0 %}
+    <p>Age: {{ beyonce.age }}</p>
+    {% else %}
+    <p>Age: Before Solo Career</p>
+    {% endif %}
+  </div>
+  </a>
+</div>
+{% endfor %} {% endblock %}
