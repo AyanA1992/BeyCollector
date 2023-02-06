@@ -8,8 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-import boto3
-import uuid
+
 
 S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
 BUCKET = 'beyoncecollector-0217'
@@ -23,7 +22,7 @@ def about(request):
 
 @login_required
 def beyonces_index(request):
-    Beyonces = Beyonces.objects.filter(user=request.user)
+    beyonces = Beyonce.objects.filter(user=request.user)
     return render(request, 'beyonces/index.html', {'beyonces': beyonces})
 
 @login_required
