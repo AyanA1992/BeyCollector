@@ -23,7 +23,7 @@ def about(request):
 @login_required
 def beyonces_index(request):
     beyonces = Beyonce.objects.filter(user=request.user)
-    return render(request, 'beyonces/index.html', {'beyonces': beyonces})
+    return render(request, 'beyonce/index.html', {'beyonces': beyonces})
 
 @login_required
 def beyonces_detail(request, beyonce_id):
@@ -31,11 +31,11 @@ def beyonces_detail(request, beyonce_id):
   
   shows_form = ShowsForm() 
   # create a list of toys the cat doesn't have
-  tours_beyonces_doesnt_have = Tour.objects.exclude(id__in=beyonce.tours.all().values_list('id'))
+#   tours_beyonce_doesnt_have = Tour.objects.exclude(id__in=beyonce.tours.all().values_list('id'))
   return render(request, 'beyonces/detail.html', {
     'beyonce': beyonce,
     'shows_form': shows_form,
-    'tours': tours_beyonce_doesnt_have
+    # 'tours': tours_beyonce_doesnt_have
   })
 
 @login_required
@@ -117,7 +117,7 @@ def signup(request):
 
 class BeyonceCreate(LoginRequiredMixin, CreateView):
   model = Beyonce  
-  fields = ('name', 'age', 'state', 'description')
+  fields = ('city', 'state', 'age', 'tour')
   success_url = '/beyonces/'
 
   def form_valid(self, form):

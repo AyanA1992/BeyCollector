@@ -3,7 +3,7 @@
 
     {% csrf_token %}
     {% if object %}
-    <h1> edit <span class="teal-text">{{ object.name }}</span></h1>
+    <h1> edit <span class="white-text">{{ object.name }}</span></h1>
     {% else %}
     <h1>Add Bey</h1>
     {% endif%}
@@ -12,5 +12,9 @@
     </table>
     <input type="submit" value="Submit!" class="btn" />
 </form>
+<script>
+    const tourEl = document.getElementById("id_tour")
 
+M.FormSelect.init(tourEl)
+</script>
 {% endblock%}

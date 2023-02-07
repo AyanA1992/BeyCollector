@@ -8,7 +8,7 @@ class Tour(models.Model):
     url = models.CharField(max_length=200)
 
     def __str__(self):
-        return f'{self.color} {self.name}'
+        return f' {self.name}'
     
     def get_absolute_url(self):
         return reverse('tours_detail', kwargs={'pk': self.id})
@@ -23,7 +23,7 @@ class Beyonce(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f'{self.city}, {self.state}'
     
     def get_absolute_url(self):
         return reverse("detail", kwargs={'beyonce_id': self.id})
@@ -50,4 +50,4 @@ class Photo(models.Model):
     beyonce = models.ForeignKey(Beyonce, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Photo for Beyonce: {self.beyonce.name} @{self.url}"
+        return f" @{self.url}"

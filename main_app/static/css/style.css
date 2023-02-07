@@ -3,15 +3,18 @@ body {
     min-height: 100vh;
     flex-direction: column;
     background-image: url("https://beyoncecollector-0217.s3.us-east-2.amazonaws.com/IMG_8396.jpg");
-    min-height: 2000px;
-    color:antiquewhite
+    min-height: 2000px; 
+    color:antiquewhite;
 
   }
   
   main {
     flex: 1 0 auto;
   }
-  
+
+  input{ color: antiquewhite}
+
+
   footer {
     padding-top: 0;
     text-align: right;
