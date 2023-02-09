@@ -7,6 +7,7 @@
   <a href="{% url 'detail' beyonce.id %}" >
   <div class="card-content>
     <span class="card-title">{{ beyonce.name }}</span>
+    <p>Tour: {{ beyonce.tour }} </p>
     <p>State: {{ beyonce.state }}</p>
     <p>Description: {{ beyonce.description }}</p>
     {% if beyonce.age > 0 %}
@@ -14,6 +15,7 @@
     {% else %}
     <p>Age: Before Solo Career</p>
     {% endif %}
+    
   </div>
   </a>
 </div>

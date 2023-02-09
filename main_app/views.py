@@ -22,7 +22,7 @@ def about(request):
 
 @login_required
 def beyonces_index(request):
-    beyonces = Beyonce.objects.filter(user=request.user)
+    beyonces = Beyonce.objects.select_related().filter(user=request.user)
     return render(request, 'beyonce/index.html', {'beyonces': beyonces})
 
 @login_required

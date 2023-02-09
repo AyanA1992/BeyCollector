@@ -19,7 +19,7 @@ class Beyonce(models.Model):
     state = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
-    tour = models.ManyToManyField(Tour)
+    tour = models.ForeignKey(Tour,on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
